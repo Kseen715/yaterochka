@@ -1,0 +1,82 @@
+version: '3.8'
+services:
+  yaterochka-web:
+    image: kseen/yaterochka-web:latest
+    container_name: yaterochka-web
+    networks:
+      - gateway
+    ports:
+      - '3001:3000'
+    restart: unless-stopped
+
+  yaterochka-nginx:
+    image: kseen/yaterochka-nginx:latest
+    container_name: yaterochka-nginx
+    networks:
+      - gateway
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: unless-stopped
+
+  yaterochka-psql:
+    container_name: yaterochka-psql
+    image: kseen/yaterochka-psql:latest
+    command:
+      - "sh"
+      - "./run.sh"
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - /mnt/d/ydb/yat-db-init:/docker-entrypoint-initdb.d
+      - /mnt/d/ydb/yat-db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      - gateway
+
+  yaterochka-back:
+    image: kseen/yaterochka-back:latest
+    container_name: yaterochka-back
+    networks:
+      - gateway
+    ports:
+      - '8000:8000'
+    restart: unless-stopped
+    environment:
+      - NAME=postgres
+      - HOST=yaterochka-psql
+      - PORT=5432
+      - PASSWORD=root
+      - USER=postgres
+    depends_on:
+      - yaterochka-psql
+
+  yaterochka-backup:
+    image: kseen/yaterochka-backup:latest
+    container_name: yaterochka-backup
+    networks:
+      - gateway
+    environment:
+      - TOKEN=y0_AgAAAABaMgwBAAsCGQAAAAD1LfUBPla45zeQTqSPP-EaXXdHWwGyKXU
+    volumes:
+      - /mnt/d/ydb/yat-db-init:/var/opt/backup_ep
+      - /mnt/d/ydb/yat-db:/var/opt/backup_data
+
+networks:
+  gateway: {}
