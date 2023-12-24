@@ -1,0 +1,19 @@
+[submodule "yaterochka-back"]
+	path = yaterochka-back
+	url = https://github.com/Kseen715/yaterochka-back
+    
+[submodule "yaterochka-web"]
+	path = yaterochka-web
+	url = https://github.com/Kseen715/yaterochka-web
+
+[submodule "yaterochka-backup"]
+	path = yaterochka-backup
+	url = https://github.com/Kseen715/yaterochka-backup
+
+[submodule "yaterochka-psql"]
+	path = yaterochka-psql
+	url = https://github.com/Kseen715/yaterochka-psql
+
+[submodule "yaterochka-nginx"]
+	path = yaterochka-nginx
+	url = https://github.com/Kseen715/yaterochka-nginx
