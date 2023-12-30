@@ -73,7 +73,7 @@ services:
     networks:
       - gateway
     environment:
-      - TOKEN=y0_AgAAAABaMgwBAAsCGQAAAAD1LfUBPla45zeQTqSPP-EaXXdHWwGyKXU
+      - TOKEN=
     volumes:
       - /mnt/d/ydb/yat-db-init:/var/opt/backup_ep
       - /mnt/d/ydb/yat-db:/var/opt/backup_data
