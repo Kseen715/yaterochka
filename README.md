@@ -8,6 +8,8 @@ This is a web application written as a course work for the 3rd year of study at 
 
 The project is a web application for a fictional company that sells random goods. The application allows you to view the catalog of goods, view the history of orders, and also allows you to log in to your Admin account.
 
+The paper itself is [here](https://github.com/Kseen715/yaterochka/blob/master/КБ-211%20Коренев%20Д.Н.%20БД%20Курсовая.pdf).
+
 ## Usage
 Clone:
 
