@@ -17,3 +17,8 @@ Setup:
 
 ```dockercompose up```
 
+## Screenshots
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Kseen715/imgs/main/yaterochka/img0001.png" />
+  <img src="https://raw.githubusercontent.com/Kseen715/imgs/main/yaterochka/img0002.png" />
+</p>
